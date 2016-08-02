@@ -27,6 +27,13 @@
 			</exclusions>
 		</dependency>
 
+		<!-- Inherited from org.jpmml:jpmml-sparkml:1.0.4 -->
+		<dependency>
+			<groupId>com.google.guava</groupId>
+			<artifactId>guava</artifactId>
+			<version>11.0.2</version>
+		</dependency>
+
 		<dependency>
 			<groupId>org.apache.spark</groupId>
 			<artifactId>spark-core_2.10</artifactId>
@@ -94,6 +101,10 @@
 							</filters>
 							<finalName>bootstrap-${project.version}</finalName>
 							<relocations>
+								<relocation>
+									<pattern>com.google.common</pattern>
+									<shadedPattern>com.shaded.google.common</shadedPattern>
+								</relocation>
 								<relocation>
 									<pattern>org.dmg.pmml</pattern>
 									<shadedPattern>org.shaded.dmg.pmml</shadedPattern>
