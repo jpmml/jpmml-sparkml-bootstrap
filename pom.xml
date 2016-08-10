@@ -62,7 +62,7 @@
 		<dependency>
 			<groupId>org.jpmml</groupId>
 			<artifactId>jpmml-sparkml</artifactId>
-			<version>1.0.4</version>
+			<version>1.0.5</version>
 		</dependency>
 	</dependencies>
 
@@ -129,7 +129,7 @@
 			<plugin>
 				<groupId>org.apache.maven.plugins</groupId>
 				<artifactId>maven-source-plugin</artifactId>
-				<version>3.0.0</version>
+				<version>3.0.1</version>
 				<executions>
 					<execution>
 						<id>attach-sources</id>
