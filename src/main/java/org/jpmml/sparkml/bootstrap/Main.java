@@ -34,9 +34,10 @@ import org.apache.spark.ml.Predictor;
 import org.apache.spark.ml.classification.DecisionTreeClassifier;
 import org.apache.spark.ml.feature.RFormula;
 import org.apache.spark.ml.regression.DecisionTreeRegressor;
-import org.apache.spark.sql.DataFrame;
-import org.apache.spark.sql.DataFrameReader;
 import org.apache.spark.sql.SQLContext;
+import org.apache.spark.sql.Row;
+import org.apache.spark.sql.Dataset;
+import org.apache.spark.sql.SparkSession;
 import org.apache.spark.sql.types.StructType;
 import org.dmg.pmml.PMML;
 import org.jpmml.model.MetroJAXBUtil;
@@ -93,15 +94,17 @@ public class Main {
 	private void run() throws Exception {
 		SparkConf sparkConf = new SparkConf();
 
-		try(JavaSparkContext sparkContext = new JavaSparkContext(sparkConf)){
-			SQLContext sqlContext = new SQLContext(sparkContext);
+		  SparkSession spark = SparkSession
+                .builder()
+                .appName("my app")
+                .getOrCreate();
 
-			DataFrameReader reader = sqlContext.read()
-				.format("com.databricks.spark.csv")
-				.option("header", "true")
-				.option("inferSchema", "true");
-
-			DataFrame dataFrame = reader.load(this.csvInput.getAbsolutePath());
+          Dataset<Row> dataFrame = spark.read()
+                .format("csv")
+                .option("header", "true")
+                .option("nullValue", "")
+                .csv(this.csvInput.getAbsolutePath())
+                ;
 
 			StructType schema = dataFrame.schema();
 			System.out.println(schema.treeString());
@@ -115,7 +118,6 @@ public class Main {
 			try(OutputStream os = new FileOutputStream(this.pmmlOutput.getAbsolutePath())){
 				MetroJAXBUtil.marshalPMML(pmml, os);
 			}
-		}
 	}
 
 	static
