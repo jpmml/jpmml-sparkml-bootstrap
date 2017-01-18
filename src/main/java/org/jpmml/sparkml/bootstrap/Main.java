@@ -103,6 +103,7 @@ public class Main {
                 .format("csv")
                 .option("header", "true")
                 .option("nullValue", "")
+                .option("inferSchema", "true")
                 .csv(this.csvInput.getAbsolutePath())
                 ;
 
