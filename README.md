@@ -3,6 +3,12 @@ JPMML-SparkML-Bootstrap
 
 The simplest way to get started with a [JPMML-SparkML] (https://github.com/jpmml/jpmml-evaluator) powered software project.
 
+# IMPORTANT #
+
+This is a legacy codebase.
+
+Starting from September 2016, this project has been superseded by the [JPMML-SparkML-Package] (https://github.com/jpmml/jpmml-sparkml-package) project.
+
 # Prerequisites #
 
 * Java 1.7 or newer.
